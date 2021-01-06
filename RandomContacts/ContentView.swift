@@ -10,12 +10,16 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject private var viewModel: ContentViewModel = .init()
     
-    private var trailingButtons: some View {
+    private var leadingButtons: some View {
         HStack {
             Button("Presets") {
                 viewModel.isPresetSheetPresented = true
             }
-            
+        }
+    }
+    
+    private var trailingButtons: some View {
+        HStack {
             Button("Delete") {
                 viewModel.error = nil
                 do {
@@ -112,7 +116,7 @@ struct ContentView: View {
                 Spacer()
             }
             .navigationTitle("RandomContacts")
-            .navigationBarItems(trailing: trailingButtons)
+            .navigationBarItems(leading: leadingButtons, trailing: trailingButtons)
             .navigationViewStyle(StackNavigationViewStyle())
         }
         .actionSheet(isPresented: $viewModel.isPresetSheetPresented) {
