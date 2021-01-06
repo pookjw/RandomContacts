@@ -10,11 +10,15 @@ import Combine
 import Contacts
 
 final class ContentViewModel: ObservableObject {
-    @Published public var numberCountFor82: String = "3"
-    @Published public var numberCountFor1: String = "3"
+    @Published public var countToSave: String = "10"
+    @Published public var regionCode: String = "1"
+    @Published public var startingNumberWith: String = "949"
+    @Published public var digits: String = "10"
+    @Published public var nameLangType: Int = 0 // RawValue of ContentViewModel.LangType
+    @Published public var isPresetSheetPresented: Bool = false
+    @Published public var isResultAlertPresented: Bool = false
     
     public var error: Swift.Error? = nil
-    @Published public var isAlertPresented: Bool = false
     
     public enum Error: Swift.Error, LocalizedError {
         case inputError
@@ -22,43 +26,70 @@ final class ContentViewModel: ObservableObject {
         public var errorDescription: String? {
             switch self {
             case .inputError:
-                return "Cannot convert input value to integer format!"
+                return "Invalid count of digits!"
             }
+        }
+    }
+    
+    public enum LangType: Int, CaseIterable {
+        case english = 0
+        case korean
+    }
+    
+    public func setPreset(of type: LangType) {
+        switch type {
+        case .english:
+            regionCode = "1"
+            startingNumberWith = ""
+            digits = "10"
+            nameLangType = 0
+        case .korean:
+            regionCode = "82"
+            startingNumberWith = "10"
+            digits = "10"
+            nameLangType = 1
         }
     }
     
     public func saveContacts() throws {
         let saveRequest: CNSaveRequest = .init()
-        guard let intFor82 = Int(numberCountFor82) else {
-            throw Error.inputError
-        }
-        guard let intFor1 = Int(numberCountFor1) else {
+        guard let countToSave = Int(countToSave),
+              let digits = Int(digits)
+        else {
             throw Error.inputError
         }
         
-        (0..<intFor82).forEach { _ in
-            let contact = CNMutableContact()
-            let randomGivenName: String = String.randomHangul(digits: 1)
-            let randomFamilyName: String = String.randomHangul(digits: 2)
-            let randomNumber: String = "+82 10-\(String.ramdomInt(digits: 4))-\(String.ramdomInt(digits: 4))"
+        (0..<countToSave).forEach { _ in
+            let randomGivenName: String
+            let randomFamilyName: String
             
+            switch LangType(rawValue: nameLangType) {
+            case .english:
+                randomGivenName = String.randomEnglish(digits: 5)
+                randomFamilyName = String.randomEnglish(digits: 8)
+            case .korean:
+                randomGivenName = String.randomHangul(digits: 1)
+                randomFamilyName = String.randomHangul(digits: 2)
+            default:
+                randomGivenName = String.randomEnglish(digits: 5)
+                randomFamilyName = String.randomEnglish(digits: 8)
+            }
+            
+            
+            let randomNumber: String = {
+                let region: String = regionCode.isEmpty ? "" : "+\(regionCode)"
+                let result: String = "\(region) \(startingNumberWith) "
+                let randomDigits: Int = digits - startingNumberWith.count
+                
+                guard randomDigits > 0 else { return result }
+                return result + String.ramdomInt(digits: randomDigits)
+            }()
+            
+            let contact = CNMutableContact()
             contact.givenName = randomGivenName
             contact.familyName = randomFamilyName
             contact.nickname = "RandomContacts"
             contact.phoneNumbers = [CNLabeledValue(label: CNLabelPhoneNumberMobile, value: CNPhoneNumber(stringValue: randomNumber))]
-            saveRequest.add(contact, toContainerWithIdentifier: nil)
-        }
-        
-        (0..<intFor1).forEach { _ in
-            let contact = CNMutableContact()
-            let randomGivenName: String = String.randomEnglish(digits: 5)
-            let randomFamilyName: String = String.randomEnglish(digits: 8)
-            let randomNumber: String = "+1 (\(String.ramdomInt(digits: 3))) \(String.ramdomInt(digits: 3))-\(String.ramdomInt(digits: 4))"
-            
-            contact.givenName = randomGivenName
-            contact.familyName = randomFamilyName
-            contact.nickname = "RandomContacts"
-            contact.phoneNumbers = [CNLabeledValue(label: CNLabelPhoneNumberiPhone, value: CNPhoneNumber(stringValue: randomNumber))]
             saveRequest.add(contact, toContainerWithIdentifier: nil)
         }
         
