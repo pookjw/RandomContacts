@@ -38,12 +38,8 @@ final class ContentViewModel: ObservableObject {
         
         (0..<intFor82).forEach { _ in
             let contact = CNMutableContact()
-            let randomGivenName: String = (0..<1).reduce("") { (value, _) in
-                return value + "\(Character.randomHangul())"
-            }
-            let randomFamilyName: String = (0..<2).reduce("") { (value, _) in
-                return value + "\(Character.randomHangul())"
-            }
+            let randomGivenName: String = String.randomHangul(digits: 1)
+            let randomFamilyName: String = String.randomHangul(digits: 2)
             let randomNumber: String = "+82 10-\(String.ramdomInt(digits: 4))-\(String.ramdomInt(digits: 4))"
             
             contact.givenName = randomGivenName
@@ -55,12 +51,8 @@ final class ContentViewModel: ObservableObject {
         
         (0..<intFor1).forEach { _ in
             let contact = CNMutableContact()
-            let randomGivenName: String = (0..<5).reduce("") { (value, _) in
-                return value + "\(Character.randomEnglish())"
-            }
-            let randomFamilyName: String = (0..<8).reduce("") { (value, _) in
-                return value + "\(Character.randomEnglish())"
-            }
+            let randomGivenName: String = String.randomEnglish(digits: 5)
+            let randomFamilyName: String = String.randomEnglish(digits: 8)
             let randomNumber: String = "+1 (\(String.ramdomInt(digits: 3))) \(String.ramdomInt(digits: 3))-\(String.ramdomInt(digits: 4))"
             
             contact.givenName = randomGivenName

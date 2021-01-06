@@ -15,7 +15,7 @@
 		F304283625A57F5700602DC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F304283425A57F5700602DC9 /* LaunchScreen.storyboard */; };
 		F304284225A57F9000602DC9 /* ContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F304284125A57F9000602DC9 /* ContentViewModel.swift */; };
 		F304284F25A5944900602DC9 /* Character+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = F304284E25A5944900602DC9 /* Character+random.swift */; };
-		F3C68BAB25A598B3000EABAA /* String+ramdomInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C68BAA25A598B3000EABAA /* String+ramdomInt.swift */; };
+		F3C68BAB25A598B3000EABAA /* String+ramdom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C68BAA25A598B3000EABAA /* String+ramdom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		F304283725A57F5700602DC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F304284125A57F9000602DC9 /* ContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewModel.swift; sourceTree = "<group>"; };
 		F304284E25A5944900602DC9 /* Character+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Character+random.swift"; sourceTree = "<group>"; };
-		F3C68BAA25A598B3000EABAA /* String+ramdomInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ramdomInt.swift"; sourceTree = "<group>"; };
+		F3C68BAA25A598B3000EABAA /* String+ramdom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ramdom.swift"; sourceTree = "<group>"; };
 		F3C68BB125A5A4E3000EABAA /* RandomContacts.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RandomContacts.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +63,7 @@
 		F304282825A57F5500602DC9 /* RandomContacts */ = {
 			isa = PBXGroup;
 			children = (
+				F3C68BBA25A5ADC5000EABAA /* Extensions */,
 				F3C68BB125A5A4E3000EABAA /* RandomContacts.entitlements */,
 				F304282925A57F5500602DC9 /* AppDelegate.swift */,
 				F304282B25A57F5500602DC9 /* SceneDelegate.swift */,
@@ -72,8 +73,6 @@
 				F304283425A57F5700602DC9 /* LaunchScreen.storyboard */,
 				F304283725A57F5700602DC9 /* Info.plist */,
 				F304283125A57F5700602DC9 /* Preview Content */,
-				F304284E25A5944900602DC9 /* Character+random.swift */,
-				F3C68BAA25A598B3000EABAA /* String+ramdomInt.swift */,
 			);
 			path = RandomContacts;
 			sourceTree = "<group>";
@@ -84,6 +83,15 @@
 				F304283225A57F5700602DC9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F3C68BBA25A5ADC5000EABAA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F304284E25A5944900602DC9 /* Character+random.swift */,
+				F3C68BAA25A598B3000EABAA /* String+ramdom.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -157,7 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F304282A25A57F5500602DC9 /* AppDelegate.swift in Sources */,
-				F3C68BAB25A598B3000EABAA /* String+ramdomInt.swift in Sources */,
+				F3C68BAB25A598B3000EABAA /* String+ramdom.swift in Sources */,
 				F304282C25A57F5500602DC9 /* SceneDelegate.swift in Sources */,
 				F304282E25A57F5500602DC9 /* ContentView.swift in Sources */,
 				F304284F25A5944900602DC9 /* Character+random.swift in Sources */,
