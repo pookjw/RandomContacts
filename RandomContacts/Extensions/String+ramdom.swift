@@ -8,19 +8,19 @@
 import Foundation
 
 public extension String {
-    static func ramdomInt(digits: Int) -> String {
+    static func ramdomInt(digits: Int = 1) -> String {
         return (0..<digits).reduce("") { (value, _) in
             return value + "\(Int.random(in: 0...9))"
         }
     }
     
-    static func randomHangul(digits: Int) -> String {
+    static func randomHangul(digits: Int = 1) -> String {
         return (0..<digits).reduce("") { (value, _) in
             return value + "\(Character.randomHangul())"
         }
     }
     
-    static func randomEnglish(digits: Int) -> String {
+    static func randomEnglish(digits: Int = 1) -> String {
         return (0..<digits).reduce("") { (value, _) in
             return value + "\(Character.randomEnglish())"
         }
