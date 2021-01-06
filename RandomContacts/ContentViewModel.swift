@@ -12,7 +12,7 @@ import Contacts
 final class ContentViewModel: ObservableObject {
     @Published public var countToSave: String = "10"
     @Published public var regionCode: String = "1"
-    @Published public var startingNumberWith: String = "949"
+    @Published public var startingNumberWith: String = ""
     @Published public var digits: String = "10"
     @Published public var nameLangType: Int = 0 // RawValue of ContentViewModel.LangType
     @Published public var isPresetSheetPresented: Bool = false
