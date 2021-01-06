@@ -26,7 +26,7 @@ final class ContentViewModel: ObservableObject {
         public var errorDescription: String? {
             switch self {
             case .inputError:
-                return "Invalid count of digits!"
+                return "Invalid count or digits!"
             }
         }
     }
