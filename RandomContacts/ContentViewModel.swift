@@ -101,17 +101,16 @@ final class ContentViewModel: ObservableObject {
         let keysToFetch: [CNKeyDescriptor] = [CNContactNicknameKey as CNKeyDescriptor]
         let containers: [CNContainer] = try contactStore.containers(matching: nil)
         let saveRequest: CNSaveRequest = .init()
-        var contacts: [CNContact] = []
         
         for container in containers {
             let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
-            let contact = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch)
-            contacts.append(contentsOf: contact)
-        }
-        
-        for contact in contacts {
-            if contact.nickname == "RandomContacts" {
-                saveRequest.delete(contact.mutableCopy() as! CNMutableContact)
+            let contacts = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch)
+            
+            contacts.forEach { contact in
+                if let mutableContact = contact.mutableCopy() as? CNMutableContact,
+                   mutableContact.nickname == "RandomContacts" {
+                    saveRequest.delete(mutableContact)
+                }
             }
         }
         
